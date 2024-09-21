@@ -3,10 +3,10 @@
     "settings": [
       {
         "file_patterns": [
-          "/LSP-vue.sublime-settings"
+          "/LSP-vetur.sublime-settings"
         ],
         "schema": {
-          "$id": "sublime://settings/LSP-vue",
+          "$id": "sublime://settings/LSP-vetur",
           "definitions": {
             "PluginConfig": {
               "properties": {
@@ -359,7 +359,7 @@
               "$ref": "sublime://settings/LSP-plugin-base"
             },
             {
-              "$ref": "sublime://settings/LSP-vue#/definitions/PluginConfig"
+              "$ref": "sublime://settings/LSP-vetur#/definitions/PluginConfig"
             }
           ]
         }
@@ -374,8 +374,8 @@
               "properties": {
                 "LSP": {
                   "properties": {
-                    "LSP-vue": {
-                      "$ref": "sublime://settings/LSP-vue#/definitions/PluginConfig"
+                    "LSP-vetur": {
+                      "$ref": "sublime://settings/LSP-vetur#/definitions/PluginConfig"
                     }
                   }
                 }

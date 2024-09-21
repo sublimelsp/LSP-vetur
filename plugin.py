@@ -5,14 +5,14 @@ import sublime
 
 
 def plugin_loaded() -> None:
-    LspVuePlugin.setup()
+    LspVeturPlugin.setup()
 
 
 def plugin_unloaded() -> None:
-    LspVuePlugin.cleanup()
+    LspVeturPlugin.cleanup()
 
 
-class LspVuePlugin(NpmClientHandler):
+class LspVeturPlugin(NpmClientHandler):
     package_name = __package__
     server_directory = 'server'
     server_binary_path = os.path.join(server_directory, 'node_modules', 'vls', 'bin', 'vls')
