@@ -1,29 +1,31 @@
 from __future__ import annotations
 
-from LSP.plugin import DottedDict
-from lsp_utils import NpmClientHandler
-import os
-import sublime
+from LSP.plugin import LspPlugin
+from LSP.plugin import OnPreStartContext
+from lsp_utils import NodeManager
+from pathlib import Path
+from sublime_lib import ResourcePath
+from typing_extensions import override
 
 
 def plugin_loaded() -> None:
-    LspVeturPlugin.setup()
+    LspVeturPlugin.register()
 
 
 def plugin_unloaded() -> None:
-    LspVeturPlugin.cleanup()
+    LspVeturPlugin.unregister()
 
 
-class LspVeturPlugin(NpmClientHandler):
-    package_name = str(__package__)
-    server_directory = 'server'
-    server_binary_path = os.path.join(server_directory, 'node_modules', 'vls', 'bin', 'vls')
+class LspVeturPlugin(LspPlugin):
 
-    def on_settings_changed(self, settings: DottedDict) -> None:
-        view = sublime.active_window().active_view()
-        if view:
-            view_settings = view.settings()
-            settings.update({
-                'vetur.format.options.tabSize': view_settings.get('tab_size', 4),
-                'vetur.format.options.useTabs': not view_settings.get('translate_tabs_to_spaces', False),
-            })
+    @classmethod
+    @override
+    def on_pre_start_async(cls, context: OnPreStartContext) -> None:
+        package_name = cls.plugin_storage_path.name
+        NodeManager.on_pre_start_async(
+            context,
+            cls.plugin_storage_path,
+            ResourcePath('Packages', package_name, 'server'),
+            Path('node_modules', 'vls', 'bin', 'vls'),
+            '>=18',
+        )
