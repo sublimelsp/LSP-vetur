@@ -27,5 +27,5 @@ class LspVeturPlugin(LspPlugin):
             cls.plugin_storage_path,
             ResourcePath('Packages', package_name, 'server'),
             Path('node_modules', 'vls', 'bin', 'vls'),
-            '>=18',
+            node_version_requirement='>=18',
         )
